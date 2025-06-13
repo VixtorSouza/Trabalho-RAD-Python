@@ -10,26 +10,26 @@ def cadastrar_cliente():
     try:
         # 2. Conecta ao banco de dados MySQL
         conexao = mysql.connector.connect(
-            host="localhost",       # Onde o banco está rodando
-            user="root",            # Usuário do banco (geralmente 'root')
-            password="@HitoriSan123",   # Substitua pela senha real
-            database="estacionamento" # Nome do banco que você criou
+            host="localhost",       
+            user="root",           
+            password="@HitoriSan123",  
+            database="estacionamento"
         )
 
         # 3. Cria o cursor (o "garçom")
         cursor = conexao.cursor()
 
-        # 4. Prepara o comando SQL para inserir os dados
+       
         comando = """
             INSERT INTO cliente (nome, endereco, cpf, telefone)
             VALUES (%s, %s, %s, %s)
         """
         valores = (nome, endereco, cpf, telefone)
 
-        # 5. Executa o comando
+    
         cursor.execute(comando, valores)
 
-        # 6. Confirma a inserção no banco de dados
+      
         conexao.commit()
 
         print("✅ Cliente cadastrado com sucesso!")
@@ -38,7 +38,7 @@ def cadastrar_cliente():
         print("Erro ao cadastrar cliente:", erro)
 
     finally:
-        # 7. Fecha o cursor e a conexão
+       
         cursor.close()
         conexao.close()
 
@@ -185,7 +185,6 @@ def editar_cliente():
         novo_cpf = input(f"Novo CPF ({cliente[3]}): ") or cliente[3]
         novo_telefone = input(f"Novo telefone ({cliente[4]}): ") or cliente[4]
 
-        # Atualiza os dados
         cursor.execute("""
             UPDATE cliente
             SET nome = %s, endereco = %s, cpf = %s, telefone = %s
